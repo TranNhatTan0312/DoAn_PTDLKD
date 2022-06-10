@@ -1,5 +1,5 @@
 Id,age,job,marital,education,default,balance,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,y
-1001,999,management,married,tertiary,no,2143,yes,no,unknown,5,may,261,1,-1,0,unknown,no
+1001,29,management,married,tertiary,no,2143,yes,no,unknown,5,may,261,1,-1,0,unknown,no
 1002,44,technician,single,secondary,no,29,yes,no,unknown,5,may,151,1,-1,0,unknown,no
 1003,33,entrepreneur,married,secondary,no,2,yes,yes,unknown,5,may,76,1,-1,0,unknown,no
 1004,47,blue-collar,married,unknown,no,1506,yes,no,unknown,5,may,92,1,-1,0,unknown,no
@@ -45202,9 +45202,9 @@ Id,age,job,marital,education,default,balance,housing,loan,contact,day,month,dura
 46201,38,technician,married,secondary,no,557,yes,no,cellular,16,nov,1556,4,-1,0,unknown,yes
 46202,53,management,married,tertiary,no,583,no,no,cellular,17,nov,226,1,184,4,success,yes
 46203,34,admin.,single,secondary,no,557,no,no,cellular,17,nov,224,1,-1,0,unknown,yes
-46204,-1,student,single,tertiary,no,113,no,no,cellular,17,nov,266,1,-1,0,unknown,yes
-46205,-1,retired,married,secondary,no,2850,no,no,cellular,17,nov,300,1,40,8,failure,yes
-46206,-1,technician,single,secondary,no,505,no,yes,cellular,17,nov,386,2,-1,0,unknown,yes
+46204,24,student,single,tertiary,no,113,no,no,cellular,17,nov,266,1,-1,0,unknown,yes
+46205,30,retired,married,secondary,no,2850,no,no,cellular,17,nov,300,1,40,8,failure,yes
+46206,27,technician,single,secondary,no,505,no,yes,cellular,17,nov,386,2,-1,0,unknown,yes
 46207,51,technician,married,tertiary,no,825,no,no,cellular,17,nov,977,3,-1,0,unknown,yes
 46208,71,retired,divorced,primary,no,1729,no,no,cellular,17,nov,456,2,-1,0,unknown,yes
 46209,72,retired,married,secondary,no,5715,no,no,cellular,17,nov,1127,5,184,3,success,yes
