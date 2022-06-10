@@ -22,7 +22,7 @@ import pickle
 import numpy as np
 #For training
 def train() -> None:
-    with open('heart_Disease_prediction_new_final.csv') as f:
+    with open('Term_Deposit_Final.csv') as f:
         df = pd.read_csv(f)
     # df = df.drop(['contact', 'poutcome'], axis=1)
     df_filtered = df.replace('unknown',np.nan)
@@ -35,7 +35,7 @@ def train() -> None:
     le = LabelEncoder()
     for col in dataset.columns[ [i == object for i in dataset.dtypes] ]:
         dataset.loc[:,col] = le.fit_transform(dataset[col])
-    dataset = dataset[['age', 'cp', 'trestbps', 'chol', 'thalach', 'oldpeak', 'slope','target']]
+    dataset = dataset[['age', 'balance','day', 'month','duration','pdays','poutcome','y']]
  
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
@@ -255,14 +255,14 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Phần mềm dự đoán"))
-        self.label.setText(_translate("MainWindow", "DỰ ĐOÁN KHẢ NĂNG MẮC BỆNH TIM"))
+        self.label.setText(_translate("MainWindow", "DỰ ĐOÁN KHẢ NĂNG ĐĂNG KÍ DỊCH VỤ TÍN DỤNG"))
         self.label_1.setText(_translate("MainWindow", "age"))
-        self.label_2.setText(_translate("MainWindow", "cp"))
-        self.label_3.setText(_translate("MainWindow", "trestbps"))
-        self.label_4.setText(_translate("MainWindow", "chol"))
-        self.label_5.setText(_translate("MainWindow", "thalach"))
-        self.label_6.setText(_translate("MainWindow", "oldpeak"))
-        self.label_7.setText(_translate("MainWindow", "slope"))
+        self.label_2.setText(_translate("MainWindow", "balance"))
+        self.label_3.setText(_translate("MainWindow", "day"))
+        self.label_4.setText(_translate("MainWindow", "month"))
+        self.label_5.setText(_translate("MainWindow", "duration"))
+        self.label_6.setText(_translate("MainWindow", "pdays"))
+        self.label_7.setText(_translate("MainWindow", "poutcome"))
         # self.label_9.setText(_translate("MainWindow", "sex"))
         # self.label_10.setText(_translate("MainWindow", "slope"))
         self.pushButton.setText(_translate("MainWindow", "CHẠY"))
@@ -280,10 +280,10 @@ class Ui_MainWindow(object):
         # self.lineEdit_9.clear()
         # self.lineEdit_10.clear()
     def Crun(self) -> None:
-        my_dict =   {"age":float(self.lineEdit_1.text()), "cp":float(self.lineEdit_2.text()), "trestbps":float(self.lineEdit_3.text())
-        , "chol":float(self.lineEdit_4.text()), "thalach":float(self.lineEdit_5.text()), "oldpeak":float(self.lineEdit_6.text()), 
-        "slope":float(self.lineEdit_7.text())} 
-        t=str('Bệnh nhân')
+        my_dict =   {"age":float(self.lineEdit_1.text()), "balance":float(self.lineEdit_2.text()), "day":float(self.lineEdit_3.text())
+        , "month":float(self.lineEdit_4.text()), "duration":float(self.lineEdit_5.text()), "pdays":float(self.lineEdit_6.text()), 
+        "poutcome":float(self.lineEdit_7.text())} 
+        t=str('Khách hàng')
         print(my_dict)
     
         output = check_input(my_dict)
@@ -294,11 +294,11 @@ class Ui_MainWindow(object):
         a = ""
         if output == 0:
             a="KHÔNG CÓ KHẢ NĂNG"
-            msg.setInformativeText(" {} {}  bị mắc bệnh tim".format(t,str(a)))
+            msg.setInformativeText(" {} {}  đăng kí dịch vụ tiền gửi tín dụng".format(t,str(a)))
             
         elif output ==1:
             a="CÓ KHẢ NĂNG"
-            msg.setInformativeText(" {} {}  bị mắc bệnh tim".format(t,str(a)))
+            msg.setInformativeText(" {} {}  đăng kí dịch vụ tiền gửi tín dụng".format(t,str(a)))
         msg.setWindowTitle("Kết quả")
         msg.exec_() 
     
