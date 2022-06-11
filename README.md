@@ -1,4 +1,4 @@
-# DoAn_PTDLKD
+
 # Hướng dẫn chạy app:
 Cài đặt PyQt5
 Chạy cmd, pip install PyQt5
