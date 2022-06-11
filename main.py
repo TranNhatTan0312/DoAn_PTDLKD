@@ -8,7 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 # @app.get('/')
 # def home():
-#     return {'text':'Khanh cute
+#     return {'text':'Tan cute
 # if __name__ == '__main__':
 #     uvicorn.run(app)
 
