@@ -20,22 +20,26 @@ import os
 import sys
 import pickle
 import numpy as np
+
 #For training
 def train() -> None:
     with open('Term_Deposit_Final.csv') as f:
         df = pd.read_csv(f)
-    # df = df.drop(['contact', 'poutcome'], axis=1)
+    # df = df.drop(['id', 'default'], axis=1)
     df_filtered = df.replace('unknown',np.nan)
     df_filtered.dropna(inplace=True)
     df_filtered.reset_index(drop=True, inplace=True)
     dataset = df_filtered.copy()
+   
     accuracies = {}
     times = {}
+   
     from sklearn.preprocessing import LabelEncoder
     le = LabelEncoder()
+
     for col in dataset.columns[ [i == object for i in dataset.dtypes] ]:
         dataset.loc[:,col] = le.fit_transform(dataset[col])
-    dataset = dataset[['age', 'balance','day', 'month','duration','pdays','poutcome','y']]
+    dataset = dataset[[ 'age', 'balance', 'day', 'duration', 'pdays','poutcome','y']]
  
     x = dataset.iloc[:, :-1].values
     y = dataset.iloc[:, -1].values
@@ -63,6 +67,7 @@ def train() -> None:
     from sklearn.model_selection import train_test_split
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
     from sklearn.ensemble import RandomForestClassifier
+
     classifier = RandomForestClassifier(n_estimators =10, criterion='entropy', random_state=0)
     classifier.fit(x_train, y_train)
     R= classifier.fit(x_train,y_train)
@@ -95,6 +100,7 @@ def check_input(data) ->int :
     op=p.predict(df)
     return op
 
+# Phần giao diện
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -115,6 +121,7 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
+
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(30, 80, 111, 31))
         font = QtGui.QFont()
@@ -122,6 +129,7 @@ class Ui_MainWindow(object):
         font.setKerning(False)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(30, 110, 111, 31))
         font = QtGui.QFont()
@@ -129,6 +137,7 @@ class Ui_MainWindow(object):
         font.setKerning(False)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(30, 140, 111, 31))
         font = QtGui.QFont()
@@ -136,6 +145,7 @@ class Ui_MainWindow(object):
         font.setKerning(False)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
+
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(30, 170, 111, 31))
         font = QtGui.QFont()
@@ -143,6 +153,7 @@ class Ui_MainWindow(object):
         font.setKerning(False)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
+        
         self.label_1 = QtWidgets.QLabel(self.centralwidget)
         self.label_1.setGeometry(QtCore.QRect(30, 50, 111, 31))
         font = QtGui.QFont()
@@ -150,39 +161,26 @@ class Ui_MainWindow(object):
         font.setKerning(False)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
+
+
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(30, 200, 111, 31))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
-        font.setKerning(False)
-        # self.label.setFont(font)
-        # self.label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.label.setObjectName("label_8")
-        # self.label_8 = QtWidgets.QLabel(self.centralwidget)
-        # self.label_8.setGeometry(QtCore.QRect(30, 260, 111, 31))
-        # font = QtGui.QFont()
-        # font.setPointSize(14)
-        # font.setKerning(False)
-        # self.label.setFont(font)
-        # self.label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.label.setObjectName("label_9")
-        # self.label_9 = QtWidgets.QLabel(self.centralwidget)
-        # self.label_9.setGeometry(QtCore.QRect(30, 290, 111, 31))
-        # font = QtGui.QFont()
-        # font.setPointSize(14)
-        # font.setKerning(False)
-        # self.label.setFont(font)
-        # self.label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.label.setObjectName("label_10")
-        # self.label_10 = QtWidgets.QLabel(self.centralwidget)
-        # self.label_10.setGeometry(QtCore.QRect(30, 310, 111, 31))
+        font.setKerning(False)       
+
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setKerning(False)
         self.label_1.setFont(font)
         self.label_1.setObjectName("label_1")
+
+
+        self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_1.setGeometry(QtCore.QRect(150, 50, 611, 31))
+        self.lineEdit_1.setObjectName("lineEdit_1")
         self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_2.setGeometry(QtCore.QRect(150, 80, 611, 31))
         self.lineEdit_2.setObjectName("lineEdit_2")
@@ -192,17 +190,14 @@ class Ui_MainWindow(object):
         self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_4.setGeometry(QtCore.QRect(150, 140, 611, 31))
         self.lineEdit_4.setObjectName("lineEdit_4")
-        self.lineEdit_1 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_1.setGeometry(QtCore.QRect(150, 50, 611, 31))
-        self.lineEdit_1.setObjectName("lineEdit_1")
         self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_5.setGeometry(QtCore.QRect(150, 170, 611, 31))
         self.lineEdit_5.setObjectName("lineEdit_5")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(50, 360, 251, 71))
-        self.lineEdit_7 = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit_7.setGeometry(QtCore.QRect(150, 230, 611, 31))
-        self.lineEdit_7.setObjectName("lineEdit_7")
+        #self.lineEdit_7 = QtWidgets.QLineEdit(self.centralwidget)
+        #self.lineEdit_7.setGeometry(QtCore.QRect(150, 230, 611, 31))
+        #self.lineEdit_7.setObjectName("lineEdit_7")
         # self.lineEdit_8 = QtWidgets.QLineEdit(self.centralwidget)
         # self.lineEdit_8.setGeometry(QtCore.QRect(150, 260, 611, 31))
         # self.lineEdit_8.setObjectName("lineEdit_8")
@@ -259,15 +254,15 @@ class Ui_MainWindow(object):
         self.label_1.setText(_translate("MainWindow", "age"))
         self.label_2.setText(_translate("MainWindow", "balance"))
         self.label_3.setText(_translate("MainWindow", "day"))
-        self.label_4.setText(_translate("MainWindow", "month"))
-        self.label_5.setText(_translate("MainWindow", "duration"))
-        self.label_6.setText(_translate("MainWindow", "pdays"))
-        self.label_7.setText(_translate("MainWindow", "poutcome"))
-        # self.label_9.setText(_translate("MainWindow", "sex"))
-        # self.label_10.setText(_translate("MainWindow", "slope"))
+        self.label_4.setText(_translate("MainWindow", "duration"))
+        self.label_5.setText(_translate("MainWindow", "pdays"))
+        self.label_6.setText(_translate("MainWindow", "poutcome"))
+        #self.label_7.setText(_translate("MainWindow", "poutcome"))
+
         self.pushButton.setText(_translate("MainWindow", "CHẠY"))
         self.pushButton_2.setText(_translate("MainWindow", "XÓA"))
-        # self.label_6.setText(_translate("MainWindow", "thalach"))
+  
+    
     def Clr(self) -> None:
         self.lineEdit_1.clear()
         self.lineEdit_2.clear()
@@ -275,14 +270,13 @@ class Ui_MainWindow(object):
         self.lineEdit_4.clear()
         self.lineEdit_5.clear()
         self.lineEdit_6.clear()
-        self.lineEdit_7.clear()
+        #self.lineEdit_7.clear()
         # self.lineEdit_8.clear()
         # self.lineEdit_9.clear()
         # self.lineEdit_10.clear()
     def Crun(self) -> None:
         my_dict =   {"age":float(self.lineEdit_1.text()), "balance":float(self.lineEdit_2.text()), "day":float(self.lineEdit_3.text())
-        , "month":float(self.lineEdit_4.text()), "duration":float(self.lineEdit_5.text()), "pdays":float(self.lineEdit_6.text()), 
-        "poutcome":float(self.lineEdit_7.text())} 
+        , "duration":float(self.lineEdit_4.text()), "pdays":float(self.lineEdit_5.text()), "poutcome":float(self.lineEdit_6.text())} 
         t=str('Khách hàng')
         print(my_dict)
     
